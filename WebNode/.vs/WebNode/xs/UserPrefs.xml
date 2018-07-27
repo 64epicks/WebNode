@@ -1,17 +1,9 @@
 ﻿<Properties StartupConfiguration="{59B4508C-D7DD-47BC-A0BD-6C4C6FA1F1CF}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="Program.cs">
     <Files>
-      <File FileName="Program.cs" Line="8" Column="21" />
+      <File FileName="Program.cs" Line="77" Column="62" />
+      <File FileName="ServerManager.cs" Line="6" Column="10" />
     </Files>
-    <Pads>
-      <Pad Id="ProjectPad">
-        <State name="__root__">
-          <Node name="WebNode" expanded="True">
-            <Node name="WebNode" expanded="True" selected="True" />
-          </Node>
-        </State>
-      </Pad>
-    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
