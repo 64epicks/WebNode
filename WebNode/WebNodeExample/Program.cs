@@ -9,11 +9,12 @@ namespace WebNodeExample
     class Program
     {
         private static NodeClient nodeClient;
-        private static string currentNet = "NONE";
+        private static string currentNet;
         private static bool passErr = false;
 
         static void Main(string[] args)
         {
+            currentNet = "NONE";
             while (true)
             {
                 #region Init
@@ -76,6 +77,7 @@ namespace WebNodeExample
                                 string conNet = Console.ReadLine();
                                 Console.Write("Creating network... ");
                                 nodeClient.createNetwork(nameNet, conNet);
+                                currentNet = nameNet;
                                 Console.WriteLine("DONE");
                                 break;
                             }
@@ -86,6 +88,18 @@ namespace WebNodeExample
                                 Console.WriteLine("DONE");
                                 break;
                             }
+                        case "start":
+                            {
+                                nodeClient.host();
+                                Console.WriteLine("Started hosting for {0}", nodeClient.name);
+                                break;
+                            }
+                        case "stop":
+                            {
+                                nodeClient.stophost();
+                                Console.WriteLine("Stopped!");
+                                break;
+                            }
                         case "load":
                             {
                                 Console.Write("Enter name of network: ");
@@ -94,6 +108,7 @@ namespace WebNodeExample
                                 try
                                 {
                                     nodeClient.loadNetworkFromFile(loName);
+                                    currentNet = loName;
                                     Console.WriteLine("Network loaded!");
                                 }
                                 catch (Exception)

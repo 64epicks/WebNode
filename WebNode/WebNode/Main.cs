@@ -11,7 +11,9 @@ namespace WebNode
         public string name;
         private string pubKey;
         private string privKey;
+        private bool isHost;
         public Network currentNetwork;
+        private Server server;
 
         public NodeClient(string password, string name = "user")
         {
@@ -21,20 +23,33 @@ namespace WebNode
             pubKey = confObject.pubKey;
             privKey = confObject.privKey;
             confObject = null;
-
+            isHost = false;
         }
         public void createNetwork(string name, string contact)
         {
             currentNetwork = WebNodeTools.CreateNetwork(name, contact);
+            if(!Directory.Exists("networks")) Directory.CreateDirectory("networks");
+            Directory.CreateDirectory("networks/" + currentNetwork.name);
         }
         public void saveNetwork()
         {
             var prod = WebNodeTools.networkToProduct(currentNetwork);
-            File.WriteAllLines(currentNetwork.name + ".json", new string[] { JsonConvert.SerializeObject(prod) });
+            File.WriteAllLines("networks/" + currentNetwork.name + "/network" + ".json", new string[] { JsonConvert.SerializeObject(prod) });
         }
         public void loadNetworkFromFile(string name)
         {
             currentNetwork = WebNodeTools.loadNetworkFromFile(name);
+        }
+        public void host(int port = 54545)
+        {
+            if (isHost) throw new Exception("Already hosting!"); 
+            isHost = true;
+            server = new Server(port);
+        }
+        public void stophost()
+        {
+            isHost = false;
+            server.stop();
         }
     }
 }

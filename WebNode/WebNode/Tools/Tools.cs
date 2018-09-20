@@ -30,7 +30,7 @@ namespace WebNode
         }
         public static Network loadNetworkFromFile(string name)
         {
-            var netObj = JsonConvert.DeserializeObject<NetworkProduct>(File.ReadAllLines(name + ".json")[0]);
+            var netObj = JsonConvert.DeserializeObject<NetworkProduct>(File.ReadAllLines("networks/" + name + "/network" + ".json")[0]);
             return new Network(netObj.name, netObj.contact, netObj.isOwner, netObj.nodes, netObj.contentLookAt, netObj.pubKey, netObj.privKey);
         }
         public static NetworkProduct networkToProduct(Network network)
