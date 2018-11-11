@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Security;
+using WebNode.Host;
 using Newtonsoft.Json;
 using System.IO;
 
@@ -9,11 +9,12 @@ namespace WebNode
     public class NodeClient
     {
         public string name;
-        private string pubKey;
+        public string pubKey;
         private string privKey;
         private bool isHost;
         public Network currentNetwork;
         private Server server;
+        private KeyProduct key = new KeyProduct();
 
         public NodeClient(string password, string name = "user")
         {
@@ -22,6 +23,10 @@ namespace WebNode
             this.name = confObject.name;
             pubKey = confObject.pubKey;
             privKey = confObject.privKey;
+
+            key.cookie = pubKey;
+            key.key = privKey;
+
             confObject = null;
             isHost = false;
         }
@@ -44,7 +49,7 @@ namespace WebNode
         {
             if (isHost) throw new Exception("Already hosting!"); 
             isHost = true;
-            server = new Server(port);
+            server = new Server(port, key);
         }
         public void stophost()
         {

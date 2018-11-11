@@ -56,8 +56,9 @@ namespace WebNodeExample
                 }
                 catch(Exception e)
                 {
-                    Console.WriteLine("Incorrect password! Please try again.");
+                    Console.WriteLine("Incorrect password! Please try again. (Press ENTER)");
                     passErr = true;
+                    Console.ReadLine();
                 }
                 #endregion
                 while (true)
@@ -120,6 +121,11 @@ namespace WebNodeExample
                         case "userName":
                             {
                                 Console.WriteLine("Your username is {0}", nodeClient.name);
+                                break;
+                            }
+                        case "pubKey":
+                            {
+                                Console.WriteLine(nodeClient.pubKey);
                                 break;
                             }
                         default:
